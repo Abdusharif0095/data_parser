@@ -1,4 +1,4 @@
-from spider import Spider
+from .spider import Spider
 from bs4 import BeautifulSoup
 
 

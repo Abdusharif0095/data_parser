@@ -1,5 +1,5 @@
 import os
-from aptoide import Aptoide
+from .aptoide import Aptoide
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
@@ -18,4 +18,3 @@ async def get(url: str) -> JSONResponse:
     json_compatible_item_data = jsonable_encoder(content)
     return JSONResponse(content=json_compatible_item_data,
                         status_code=status)
-
