@@ -9,7 +9,7 @@ def test_get_data():
     response = client.get(f"get_url?url={url}")
     response_json = response.json()
 
-    # test response ststus_code
+    # test response status_code
     assert response.status_code == 200
     # test name: Instagram
     assert response_json.get("App's name", "") == "Instagram"
@@ -17,3 +17,14 @@ def test_get_data():
     # assert response_json.get("App's version", '') == "279.0.0.0.28"
     # test number of downloads: 115M
     assert response_json.get("Number of downloads") == "115M"
+
+
+def test_get_invalid_url():
+    url = "https://invalid.en.aptoide.com/app"
+    response = client.get(f"get_url?url={url}")
+
+    # test response status_code
+    assert response.status_code == 400
+
+    # test response_json
+    assert response.json() == {}

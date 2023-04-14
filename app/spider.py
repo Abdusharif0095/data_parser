@@ -4,6 +4,9 @@ from http import HTTPStatus
 from aiohttp import ClientSession
 
 
+logger = logging.getLogger(__name__)
+
+
 class Spider:
     headers = {
         "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; "
@@ -21,7 +24,9 @@ class Spider:
                     return await response.read(), response.status
 
         except Exception as error:
-            raise Exception(f"This error was received while getting data from {url}: {error}")
+            logger.error(f"This error was received while getting data from {url}: {error}")
+            return False, 400
 
-    def is_valid_url(self, url: str, base_url: str) -> bool:
+    @classmethod
+    def is_valid_url(cls, url: str, base_url: str) -> bool:
         return base_url in url and validators.url(url)
